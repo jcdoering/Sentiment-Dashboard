@@ -1,0 +1,86 @@
+# R code for sentiment analysis
+
+# The following packages need to be installed
+
+install.packages(‘twitteR')
+install.packages(‘plyr’)
+install.packages(‘bit64’)
+install.packages(‘bitops’)
+install.packages(‘htmltools’)
+install.packages(‘httr’)
+install.packages(‘httpuv’)
+install.packages(’NLP’)
+install.packages(‘Rcpp’)
+install.packages(‘RCurl’)
+install.packages(‘rjson’)
+install.packages(‘Rstem’)
+install.packages(’tm’)
+install.packages(‘XML’)
+install.packages(’slam’)
+install.packages(‘DBI’)
+
+# The sentiment package also needs to installed, though it cannot be
+# pulled using the “install.packages” line. It is archived and must be
+# downloaded from the archives section of the R website, then installed
+
+# Next, load packages.
+
+library(‘twitteR')
+library(‘plyr’)
+library(‘bit64’)
+library(‘bitops’)
+library(‘htmltools’)
+library(‘httr’)
+library(‘httpuv’)
+library(’NLP’)
+library(‘Rcpp’)
+library(‘RCurl’)
+library(‘rjson’)
+library(‘Rstem’)
+library(’tm’)
+library(‘XML’)
+library(’slam’)
+library(‘DBI’)
+
+# Pull algorithms from github
+
+install_github("twitteR", username="geoffjentry”)
+
+# Setup Twiiter oauth
+
+setup_twitter_oauth("9iJIYtA4FXGGAghgrTX2FENrA", "T4MaiNDnz9jWij9gb19wLfp9Rr8D4JM2mqwN0xKleeiMqL8hnp”)
+
+# Download positive and negative word lists (i’ll send them to you)
+# Load positive and negative word lists
+
+pos = scan('positive-words.txt', what='character', comment.char=';') neg= scan('negative-words.txt', what='character', comment.char=';’)
+
+# Pull tweets. We are running multiple analyses, so each analysis will
+# require a different set of tweets pulled
+
+CTmood = searchTwitter(“#canadiantire”, “#thetire”, “#crappytire")
+BFLICmood = searchTwitter(“#builtforlifeincanada”)
+CTSTOCKmood = searchTwitter(“#canadiantirestock)
+WALMARTmood = searchTwitter(“#walmart”)
+LOWESmood = searchTwitter(“#lowes”)
+AMAZONmood = searchTwitter(“#amazon”)
+ALIBABAmood = searchTwitter(“#alibaba”)
+HDmood = searchTwitter(“#homedepot”)
+RONAmood = searchTwitter(“#rona”)
+HBCmood = searchTwitter(“#hbc”, “#hudsonsbay”, “#thebay”)
+SEARSmood = searchTwitter(“#sears”)
+
+
+# Finally, run analyses
+
+classify_polarity(CTmood.data, algorithm="bayes")
+classify_polarity(BFLICmood.data, algorithm="bayes”)
+classify_polarity(CTSTOCKmood.data, algorithm="bayes”)
+classify_polarity(WALMARTmood.data, algorithm="bayes”)
+classify_polarity(LOWESmood.data, algorithm="bayes”)
+classify_polarity(AMAZONmood.data, algorithm="bayes”)
+classify_polarity(ALIBABAmood.data, algorithm="bayes”)
+classify_polarity(HDmood.data, algorithm="bayes”)
+classify_polarity(RONAmood.data, algorithm="bayes”)
+classify_polarity(HBCmood.data, algorithm="bayes”)
+classify_polarity(SEARSmood.data, algorithm="bayes”)
