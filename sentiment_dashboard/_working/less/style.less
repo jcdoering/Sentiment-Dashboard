@@ -1,0 +1,138 @@
+/* style.less
+ * v1.0.0
+ */
+
+// Core Typography
+	// 'Roboto' 300,300i,700,700i - 'Montserrat' 400,700
+	@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:700italic,300,700,300italic);
+
+// SET Variables
+	@baseFontSizeMultiplier: 10px;
+	@touchBase: 5rem; //5 times the multiplier REM = HTML/BODY font size for older browsers
+	@navHeight: (@touchBase * 2.4);
+	// colours
+	@color-white: #fff;
+	@color-main: #333;
+	@color-chartBG: darken(@color-white,3%);
+	// typography
+	@ff-main: 'Roboto', 'Helvetica-Neue', sans-serif;
+	@ff-header: 'Montserrat', 'Helvetica-Neue', sans-serif;
+
+// Import Kube framework
+	@import "kube.less";
+
+// App-specific class definitions
+	.restrict960 {
+		display: block;
+		max-width: 960px !important;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	@media only screen and (min-width: 768px) {
+		.hide-desktop {
+			display: none;
+		}
+	}
+
+	@media only screen and (max-width: 767px) {
+		.hide-mobile {
+			display: none;
+		}
+	}
+
+	//DEBUG CLASSES
+	.g10 {
+		background-color: rgba(0,0,0,0.1);
+	}
+
+// App-layout objects
+	html, body {
+		height: 100%;
+		//font-size: @baseFontSizeMultiplier;
+		font-family: @ff-main;
+		font-weight: 300;
+		color: @color-main;
+	}
+
+	#grid {
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-flex-direction: row;
+		-ms-flex-direction: row;
+		flex-direction: row;
+		-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		-webkit-justify-content: flex-start;
+		-ms-flex-pack: start;
+		justify-content: flex-start;
+		-webkit-align-content: flex-start;
+		-ms-flex-line-pack: start;
+		align-content: flex-start;
+		-webkit-align-items: flex-start;
+		-ms-flex-align: start;
+		align-items: flex-start;
+		width: 100%;
+		height: 100%;
+	}
+
+	.cell {
+		-webkit-order: 0;
+		-ms-flex-order: 0;
+		order: 0;
+		-webkit-flex: 1 0 auto;
+		-ms-flex: 1 0 auto;
+		flex: 1 0 auto;
+		-webkit-align-self: auto;
+		-ms-flex-item-align: auto;
+		align-self: auto;
+		width: 33.333333333%;
+		height: 50%;
+		padding: 2rem; 
+		//responsive defs
+		@media only screen and (max-width: 960px) and (min-width: 600px) {
+			width: 50%;
+		}
+		@media only screen and (max-width: 599px) {
+			width: 100%;
+		}
+		.chart {
+			width: 100%;
+			height: 100%;
+			background-color: @color-chartBG;
+		}
+	}
+
+	#description {
+		header {
+			font-family: @ff-header;
+			font-size: 1.5rem;
+			margin: 2rem 0rem;
+			text-transform: uppercase;
+			//responsive defs
+			@media only screen and (max-width: 960px) and (min-width: 600px) {
+				font-size: 1.9rem;
+				margin: 2.1rem 0rem;
+			}
+			@media only screen and (max-width: 599px) {
+				font-size: 1.7rem;
+				margin: 1.7rem 0rem;
+			}
+		}
+		p {
+			font-size: 0.9rem;
+			//responsive defs
+			@media only screen and (max-width: 960px) and (min-width: 600px) {
+				font-size: 1.3rem;
+			}
+			@media only screen and (max-width: 599px) {
+				font-size: 1.1rem;
+			}
+		}
+		p.tip {
+			color: lighten(@color-main,63%);
+		}
+	}
+	
