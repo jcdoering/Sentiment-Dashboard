@@ -1,0 +1,40 @@
+<section id="grid">
+  <div class="cell" id="description">
+    <header>
+      Sentiment Dashboard
+    </header>
+    <p>
+      Here are the sentiment graphs generated from the tweets pulled from different companies.
+    </p>
+    <p class="tip">
+      Hover over a point on the cell for data.
+    </p>
+  </div>
+  <div class="cell" style="max-width:33.33%;" ng-repeat="mood in ::moods track by $index" ng-if="labels[mood.mood].length > 0 ">
+    <div ng-if="labels[mood.mood].length > 0">
+      <center><h3 style="display:inline-block;">{{::mood.company}}</h3></center>
+      <div>
+          <p>Timeline: 
+            <a ng-class="{bold: mood.type=='hour'}" ng-click="mood.type='hour';mood.position = 0;getData(mood.mood, mood.type);">Hour</a> 
+            <a ng-class="{bold: mood.type=='day'}" ng-click="mood.type='day';mood.position = 0;getData(mood.mood, mood.type);">Day</a>   
+            <a ng-class="{bold: mood.type=='week'}" ng-click="mood.type='week';mood.position = 0;getData(mood.mood, mood.type);">Week</a> 
+          </p>
+      </div>
+
+      <div class="chart">
+        <div> </div>
+        <canvas id="line" class="chart chart-line" data="returnData(data[mood.mood], -5, mood.position, $index)" labels="returnLabels(labels[mood.mood], -5, mood.position, $index)" click="onClick" options="options"></canvas>
+       <center>
+        <i class="fa fa-chevron-left" style="float:left;padding-top: 5px;" ng-click="mood.position = mood.position + 1;"></i>
+        <i class="fa fa-chevron-right" style="float:right;padding-top: 5px;" ng-click="mood.position = mood.position - 1;"></i>
+      </center>
+      </div>
+
+      <center><h5>{{::mood.search}}</h5></center>
+    </div>
+    <div ng-if="labels[mood.mood].length === undefined">
+      <center style="margin-top:10%;"><i class="fa fa-spinner fa-pulse fa-5x"></i></center>
+    </div>
+  </div>
+
+</section>
